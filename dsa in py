@@ -1,0 +1,116 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        temp = self.head
+        while temp.next:
+            temp = temp.next
+        temp.next = new_node
+
+    def display(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("None")
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, data):
+        self.items.append(data)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+        return "Stack is empty"
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+        return "Stack is empty"
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def display(self):
+        print("Stack (top -> bottom):", self.items[::-1])
+
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def enqueue(self, data):
+        self.items.append(data)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+        return "Queue is empty"
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def display(self):
+        print("Queue (front -> rear):", self.items)
+
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(root):
+    if root:
+        inorder_traversal(root.left)
+        print(root.data, end=" ")
+        inorder_traversal(root.right)
+
+
+if _name_ == "_main_":
+    print("==== LINKED LIST ====")
+    ll = LinkedList()
+    ll.insert(10)
+    ll.insert(20)
+    ll.insert(30)
+    ll.display()
+
+    print("\n==== STACK ====")
+    stack = Stack()
+    stack.push(5)
+    stack.push(10)
+    stack.push(15)
+    stack.display()
+    print("Popped:", stack.pop())
+    stack.display()
+
+    print("\n==== QUEUE ====")
+    queue = Queue()
+    queue.enqueue(1)
+    queue.enqueue(2)
+    queue.enqueue(3)
+    queue.display()
+    print("Dequeued:", queue.dequeue())
+    queue.display()
+
+    print("\n==== BINARY TREE ====")
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+
+    print("Inorder Traversal:", end=" ")
+    inorder_traversal(root)
+    print()
